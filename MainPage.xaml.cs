@@ -2,23 +2,42 @@
 
 public partial class MainPage : ContentPage
 {
-	int count = 0;
 
 	public MainPage()
 	{
 		InitializeComponent();
 	}
 
-	private void OnCounterClicked(object sender, EventArgs e)
+	private async void OnPickFileClicked(object sender, EventArgs e)
 	{
-		count++;
+		var options = new PickOptions
+		{
+			PickerTitle = "Выберите файл!"
+		};
 
-		if (count == 1)
-			CounterBtn.Text = $"Clicked {count} time";
-		else
-			CounterBtn.Text = $"Clicked {count} times";
+		var result = await PickAndShow(options);
+		if(result != null)
+		{
+			FileName.Text = $"Выбранный файл {result.FileName}";
+		}
+	}
 
-		SemanticScreenReader.Announce(CounterBtn.Text);
+	public async Task<FileResult> PickAndShow(PickOptions options)
+	{		
+    	try
+    	{
+        	var result = await FilePicker.Default.PickAsync(options);
+        	if (result != null)
+        	{
+            	using var stream = await result.OpenReadAsync();
+        	}
+        	return result;
+    	}
+    	catch (Exception ex)
+		{
+			await DisplayAlert("Ошибка", $"Произошел сбой\n{ex.Message}", "OK");
+		}
+
+    return null;
 	}
 }
-

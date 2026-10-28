@@ -8,7 +8,7 @@
     Title="LAB2">
 
     <ShellContent
-        Title="Home"
+        Title="CryptoApp"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
 
