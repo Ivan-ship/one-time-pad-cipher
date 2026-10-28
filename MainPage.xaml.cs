@@ -19,6 +19,7 @@ public partial class MainPage : ContentPage
 		if(result != null)
 		{
 			FileName.Text = $"Выбранный файл {result.FileName}";
+            FileName.TextColor = Colors.Green;
 		}
 	}
 
