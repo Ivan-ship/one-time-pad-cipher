@@ -8,20 +8,117 @@
             Padding="30"
             Spacing="20">
             
+            <Grid ColumnDefinitions="*, *, *" ColumnSpacing="10">
+                <Button
+                    Grid.Column="0"
+                    Text="Ключ"
+                    WidthRequest="155"
+                    HeightRequest="50"
+                    BackgroundColor="#FF939393"
+                    TextColor="White"
+                    FontSize="18"
+                    Clicked="OnPickFileClicked">
+                
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroup Name="CommonStates">
 
-            <Button
-                Text="Выбрать файл"
-                WidthRequest="155"
-                HeightRequest="50"
-                BackgroundColor="Green"
-                FontSize="18"
-                Clicked="OnPickFileClicked"/>
+                            <VisualState Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor"
+                                            Value="Transparent" />
+                                    <Setter Property="TextColor"
+                                            Value="White" />
+                                </VisualState.Setters>
+                            </VisualState>
 
+                            <VisualState Name="PointerOver">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor"
+                                            Value="White" />
+                                    <Setter Property="TextColor"
+                                            Value="Black" />
+                                </VisualState.Setters>
+                            </VisualState>
+
+                        </VisualStateGroup>
+                    </VisualStateManager.VisualStateGroups>
+                </Button>
+
+                <Button
+                    Grid.Column="1"
+                    Text="Шифрование"
+                    WidthRequest="155"
+                    HeightRequest="50"
+                    BackgroundColor="#FF939393"
+                    TextColor="White"
+                    FontSize="18"
+                    Clicked="OnPickFileClicked">
+
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroup Name="CommonStates">
+
+                            <VisualState Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor"
+                                            Value="Transparent" />
+                                    <Setter Property="TextColor"
+                                            Value="White" />
+                                </VisualState.Setters>
+                            </VisualState>
+
+                            <VisualState Name="PointerOver">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor"
+                                            Value="White" />
+                                    <Setter Property="TextColor"
+                                            Value="Black" />
+                                </VisualState.Setters>
+                            </VisualState>
+
+                        </VisualStateGroup>
+                    </VisualStateManager.VisualStateGroups>
+                </Button>
+                
+                <Button
+                    Grid.Column="2"
+                    Text="Шифрование"
+                    WidthRequest="155"
+                    HeightRequest="50"
+                    BackgroundColor="#FF939393"
+                    TextColor="White"
+                    FontSize="18"
+                    Clicked="OnPickFileClicked">
+
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroup Name="CommonStates">
+
+                            <VisualState Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor"
+                                            Value="Transparent" />
+                                    <Setter Property="TextColor"
+                                            Value="White" />
+                                </VisualState.Setters>
+                            </VisualState>
+
+                            <VisualState Name="PointerOver">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor"
+                                            Value="White" />
+                                    <Setter Property="TextColor"
+                                            Value="Black" />
+                                </VisualState.Setters>
+                            </VisualState>
+
+                        </VisualStateGroup>
+                    </VisualStateManager.VisualStateGroups>
+                </Button>
+            </Grid>
             <Label
-                x:Name="FileName"
-                Text="Файл не выбран"
-                FontSize="18"
-                HorizontalOptions="Center"/>
+                    x:Name="FileName"
+                    Text="Файл не выбран"
+                    FontSize="18"
+                    HorizontalOptions="Center"/>
         </VerticalStackLayout>
     </ScrollView>
 
