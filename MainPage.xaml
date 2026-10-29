@@ -17,7 +17,7 @@
                     BackgroundColor="#FF939393"
                     TextColor="White"
                     FontSize="18"
-                    Clicked="OnPickFileClicked">
+                    Clicked="OnGenerateKey">
                 
                     <VisualStateManager.VisualStateGroups>
                         <VisualStateGroup Name="CommonStates">
@@ -44,6 +44,16 @@
                     </VisualStateManager.VisualStateGroups>
                 </Button>
 
+                <Entry
+                x:Name="KeyEntry"
+                Margin="0, 200, 0, 0"
+                Placeholder="Введите ключ..."
+                FontSize="18"
+                TextColor="White"
+                PlaceholderColor="Gray"
+                BackgroundColor="Transparent"
+                WidthRequest="250"
+                HorizontalOptions="Center"/>
                 <Button
                     Grid.Column="1"
                     Text="Шифрование"
@@ -119,6 +129,8 @@
                     Text="Файл не выбран"
                     FontSize="18"
                     HorizontalOptions="Center"/>
+            
+            
         </VerticalStackLayout>
     </ScrollView>
 

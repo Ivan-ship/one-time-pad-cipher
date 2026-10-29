@@ -1,4 +1,6 @@
-﻿namespace LAB2;
+﻿using System.Text;
+
+namespace LAB2;
 
 public partial class MainPage : ContentPage
 {
@@ -40,5 +42,14 @@ public partial class MainPage : ContentPage
 		}
 
     return null;
+	}
+
+	//Генерация ключа шифрования
+	private async void OnGenerateKey(object sender, EventArgs e)
+	{
+		string key = KeyEntry.Text;
+
+		//Переводим текст в UTF-8
+		byte[] bytes = Encoding.UTF8.GetBytes(key);
 	}
 }
