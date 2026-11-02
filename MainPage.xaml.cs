@@ -67,6 +67,7 @@ public partial class MainPage : ContentPage
 			return;
 		}
 		encryptionKey = new EncryptionKey(keySize);
+		await DisplayAlert("Успех!", "Успешное создание ключа!", "OK");
 	}
 
 	//Сохранение ключа шифрования
