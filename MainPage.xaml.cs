@@ -11,6 +11,8 @@ public partial class MainPage : ContentPage
 		InitializeComponent();
 	}
 
+	private EncryptionKey? encryptionKey;
+
 	private async void OnPickFileClicked(object sender, EventArgs e)
 	{
 		var options = new PickOptions
@@ -50,7 +52,49 @@ public partial class MainPage : ContentPage
 	{
 		string key = KeyEntry.Text;
 
-		//Переводим текст в UTF-8
-		byte[] bytes = Encoding.UTF8.GetBytes(key);
+		if(!int.TryParse(key, out int keySize))
+		{
+			await DisplayAlert("Ошибка!", "Введите конкретное число!", "OK");
+			return;
+		}
+
+		if(keySize < 3)
+		{
+			await DisplayAlert(
+				"Ошибка!", 
+				"Размер ключа не должен быть менее 3 символов!", 
+				"OK");
+			return;
+		}
+		encryptionKey = new EncryptionKey(keySize);
+	}
+
+	//Сохранение ключа шифрования
+	private async void OnSaveKeyCliccked(object sender, EventArgs e)
+	{
+		if(encryptionKey == null)
+		{
+			await DisplayAlert(
+				"Ошибка!", 
+				"Сначала нужно создать ключ шифрований!", 
+				"OK");
+			return;
+		}
+
+		try
+		{
+			await encryptionKey.EncryptArray();
+			await DisplayAlert(
+				"Успех!", 
+				"Успешное сохранение!", 
+				"OK");
+		}
+		catch(Exception ex)
+		{
+			await DisplayAlert(
+				"Ошибка!", 
+				$"{ex}", 
+				"OK");
+		}
 	}
 }

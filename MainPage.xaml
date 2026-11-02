@@ -45,15 +45,16 @@
                 </Button>
 
                 <Entry
-                x:Name="KeyEntry"
-                Margin="0, 200, 0, 0"
-                Placeholder="Введите ключ..."
-                FontSize="18"
-                TextColor="White"
-                PlaceholderColor="Gray"
-                BackgroundColor="Transparent"
-                WidthRequest="250"
-                HorizontalOptions="Center"/>
+                    x:Name="KeyEntry"
+                    Margin="0, 200, 0, 0"
+                    Placeholder="Введите размер ключа(симв)"
+                    Keyboard="Numeric"
+                    FontSize="18"
+                    TextColor="White"
+                    PlaceholderColor="Gray"
+                    BackgroundColor="Transparent"
+                    WidthRequest="250"
+                    HorizontalOptions="Center"/>
                 <Button
                     Grid.Column="1"
                     Text="Шифрование"
@@ -123,14 +124,23 @@
                         </VisualStateGroup>
                     </VisualStateManager.VisualStateGroups>
                 </Button>
+
+                <Button
+                    Grid.Column="1"
+                    Text="Сохранить"
+                    WidthRequest="155"
+                    Margin="0, 200, 850, -200"
+                    HeightRequest="50"
+                    BackgroundColor="Green"
+                    TextColor="White"
+                    FontSize="18"
+                    Clicked="OnSaveKeyCliccked"/>
             </Grid>
             <Label
                     x:Name="FileName"
                     Text="Файл не выбран"
                     FontSize="18"
                     HorizontalOptions="Center"/>
-            
-            
         </VerticalStackLayout>
     </ScrollView>
 
