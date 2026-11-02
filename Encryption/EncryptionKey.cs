@@ -1,6 +1,6 @@
 ﻿using OtpNet;
 using System.Security.Cryptography;
-using Microsoft.Maui.Storage;
+using CommunityToolkit.Maui.Storage;
 using System.Text;
 
 namespace LAB2.Encryption;
@@ -24,6 +24,13 @@ public class EncryptionKey
             Encoding.UTF8.GetBytes(keyText)
         );
 
-        var res = await FileImageSourceConverter();
+        var res = await FileSaver.Default.SaveAsync(
+            "EncryptionKey.txt",
+            stream,
+            CancellationToken.None
+        );
+
+        if (!res.IsSuccessful)
+            throw new Exception("Не удалось сохранить ключ!", res.Exception);
     }
 }
