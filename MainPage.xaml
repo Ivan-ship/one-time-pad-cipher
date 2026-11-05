@@ -143,6 +143,17 @@
                     TextColor="White"
                     FontSize="18"
                     Clicked="OnSaveKeyCliccked"/>
+            
+            <Button
+                    Grid.Column="2"
+                    Text="Ключ"
+                    WidthRequest="155"
+                    Margin="0, -130, 0, 0"
+                    HeightRequest="50"
+                    BackgroundColor="Green"
+                    TextColor="White"
+                    FontSize="18"
+                    Clicked="OnDowloadKey"/>
         </VerticalStackLayout>
     </ScrollView>
 

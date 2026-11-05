@@ -19,13 +19,10 @@ public class EncryptionKey
     //Копия массива
     async public Task EncryptArray()
     {
-        string keyText = string.Join(" ", Key);
-        using var stream = new MemoryStream(
-            Encoding.UTF8.GetBytes(keyText)
-        );
+        using var stream = new MemoryStream(Key);
 
         var res = await FileSaver.Default.SaveAsync(
-            "EncryptionKey.txt",
+            "EncryptionKey.bin",
             stream,
             CancellationToken.None
         );

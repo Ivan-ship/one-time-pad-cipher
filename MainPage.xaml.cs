@@ -12,7 +12,9 @@ public partial class MainPage : ContentPage
 	}
 
 	private EncryptionKey? encryptionKey;
+	private long? fileSize;
 
+	//Загрузка файла!
 	private async void OnPickFileClicked(object sender, EventArgs e)
 	{
 		var options = new PickOptions
@@ -23,8 +25,13 @@ public partial class MainPage : ContentPage
 		var result = await PickAndShow(options);
 		if(result != null)
 		{
-			FileName.Text = $"Выбранный файл {result.FileName}";
-            FileName.TextColor = Colors.Green;
+			using(var stream = await result.OpenReadAsync())
+			{
+				long bytesCount = stream.Length;
+				fileSize = bytesCount;
+				FileName.Text = $"Выбранный файл {result.FileName}\n Размер текста {fileSize} байт";
+            	FileName.TextColor = Colors.Green;
+			}
 		}
 	}
 
@@ -96,6 +103,25 @@ public partial class MainPage : ContentPage
 				"Ошибка!", 
 				$"{ex}", 
 				"OK");
+		}
+	}
+
+	private async void OnDowloadKey(object sender, EventArgs e)
+	{
+		var options = new PickOptions
+		{
+			PickerTitle = "Выберите файл!"
+		};
+
+		var result = await PickAndShow(options);
+		if(result != null)
+		{
+			using(var stream = await result.OpenReadAsync())
+			{
+				long bytssCount = stream.Length;
+				FileName.Text = $"Ключ шифрования {bytssCount} байт";
+            	FileName.TextColor = Colors.Green;
+			}
 		}
 	}
 }
