@@ -10,10 +10,12 @@ public partial class MainPage : ContentPage
 	public MainPage()
 	{
 		InitializeComponent();
+		encryption = new FileEncryption();
 	}
 
 	private EncryptionKey? encryptionKey;
 	private FileEncryption? encryption;
+	private byte[]? keyBytes;
 
 	//Загрузка файла!
 	private async void OnPickFileClicked(object sender, EventArgs e)
@@ -26,15 +28,13 @@ public partial class MainPage : ContentPage
 		var result = await PickAndShow(options);
 		if(result != null)
 		{
-			FileEncryption encryption = new FileEncryption();
-
-			byte[] fileBytes = await encryption.GetFileBytes(result);
+			byte[] fileBytes = await encryption!.GetFileBytes(result);
 			FileName.Text = $"Выбранный файл {result.FileName}\n Размер текста {fileBytes.Length} байт";
 			FileName.TextColor = Colors.Green;
 		}
 	}
 
-	public async Task<FileResult> PickAndShow(PickOptions options)
+	public async Task<FileResult?> PickAndShow(PickOptions options)
 	{		
     	try
     	{
@@ -116,12 +116,9 @@ public partial class MainPage : ContentPage
 		var result = await PickAndShow(options);
 		if(result != null)
 		{
-			using(var stream = await result.OpenReadAsync())
-			{
-				long bytssCount = stream.Length;
-				FileName.Text = $"Ключ шифрования {bytssCount} байт";
-            	FileName.TextColor = Colors.Green;
-			}
+			keyBytes = await encryption!.GetFileBytes(result);
+			FileName.Text = $"Ключ шифрования: {keyBytes.Length}";
+			FileName.TextColor = Colors.Green;
 		}
 	}
 }
