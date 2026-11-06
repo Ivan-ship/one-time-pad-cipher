@@ -92,7 +92,7 @@
                 
                 <Button
                     Grid.Column="2"
-                    Text="Шифрование"
+                    Text="Дешифрование"
                     WidthRequest="155"
                     HeightRequest="50"
                     BackgroundColor="#FF939393"
@@ -127,17 +127,12 @@
 
                 
             </Grid>
-            <Label
-                    x:Name="FileName"
-                    Text="Файл не выбран"
-                    FontSize="18"
-                    HorizontalOptions="Center"/>
             
             <Button
                     Grid.Column="1"
                     Text="Сохранить"
                     WidthRequest="155"
-                    Margin="0, -45, 850, 0"
+                    Margin="0, 26, 850, 0"
                     HeightRequest="50"
                     BackgroundColor="Green"
                     TextColor="White"
@@ -148,12 +143,29 @@
                     Grid.Column="2"
                     Text="Ключ"
                     WidthRequest="155"
-                    Margin="0, -130, 0, 0"
+                    Margin="0, -80, 0, 0"
                     HeightRequest="50"
                     BackgroundColor="Green"
                     TextColor="White"
                     FontSize="18"
                     Clicked="OnDowloadKey"/>
+            
+            <Button
+                    Grid.Column="2"
+                    Text="Зашифровать"
+                    WidthRequest="155"
+                    Margin="0, 0, 0, 0"
+                    HeightRequest="50"
+                    BackgroundColor="#FFDA0000"
+                    TextColor="White"
+                    FontSize="18"
+                    Clicked="OnDowloadKey"/>
+            
+            <Label
+                    x:Name="FileName"
+                    Text="Файл не выбран"
+                    FontSize="18"
+                    HorizontalOptions="Center"/>
         </VerticalStackLayout>
     </ScrollView>
 
