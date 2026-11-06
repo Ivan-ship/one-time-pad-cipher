@@ -121,4 +121,10 @@ public partial class MainPage : ContentPage
 			FileName.TextColor = Colors.Green;
 		}
 	}
+
+	//Зашифровать
+	private async void OnEncrypt(object sender, EventArgs e)
+	{
+		await DisplayAlert("Attention!", "Оталдка!", "Ok");
+	}
 }
