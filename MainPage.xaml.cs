@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using LAB2.Encryption;
+using Microsoft.Maui.Graphics.Text;
 
 namespace LAB2;
 
@@ -12,7 +13,7 @@ public partial class MainPage : ContentPage
 	}
 
 	private EncryptionKey? encryptionKey;
-	private long? fileSize;
+	private FileEncryption? encryption;
 
 	//Загрузка файла!
 	private async void OnPickFileClicked(object sender, EventArgs e)
@@ -25,13 +26,11 @@ public partial class MainPage : ContentPage
 		var result = await PickAndShow(options);
 		if(result != null)
 		{
-			using(var stream = await result.OpenReadAsync())
-			{
-				long bytesCount = stream.Length;
-				fileSize = bytesCount;
-				FileName.Text = $"Выбранный файл {result.FileName}\n Размер текста {fileSize} байт";
-            	FileName.TextColor = Colors.Green;
-			}
+			FileEncryption encryption = new FileEncryption();
+
+			byte[] fileBytes = await encryption.GetFileBytes(result);
+			FileName.Text = $"Выбранный файл {result.FileName}\n Размер текста {fileBytes.Length} байт";
+			FileName.TextColor = Colors.Green;
 		}
 	}
 
@@ -106,6 +105,7 @@ public partial class MainPage : ContentPage
 		}
 	}
 
+	//Загрузка созданного ключа шифрования
 	private async void OnDowloadKey(object sender, EventArgs e)
 	{
 		var options = new PickOptions
