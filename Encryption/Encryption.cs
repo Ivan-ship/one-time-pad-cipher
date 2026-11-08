@@ -34,6 +34,7 @@ public class FileEncryption
         if(fileBytes.Length != keyBytes.Length)
         {
             throw new Exception("Разиер файла и ключа не совпадают!");
+            throw new Exception("Размер файла и ключа не совпадают!");
         }
 
         //Массив байтов файла(подлежащего кодировке)

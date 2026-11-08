@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using LAB2.Encryption;
+using LAB2.Decoding;
 using Microsoft.Maui.Graphics.Text;
 
 namespace LAB2;
@@ -11,10 +12,12 @@ public partial class MainPage : ContentPage
 	{
 		InitializeComponent();
 		encryption = new FileEncryption();
+		decode = new DecodingFile();
 	}
 
 	private EncryptionKey? encryptionKey;
 	private FileEncryption? encryption;
+	private DecodingFile? decode;
 	private byte[]? keyBytes;
 	private byte[]? fileBytes;
 	//Загрузка файла!
@@ -139,6 +142,30 @@ public partial class MainPage : ContentPage
 				"encrypted.pdf"
 			);
 			await DisplayAlert("Успеншо", "Сохранение", "OK");
+			await DisplayAlert("Успеное", "Сохранение", "OK");
+		}
+		catch(Exception ex)
+		{
+			await DisplayAlert("Сбой", $"{ex}", "OK");
+		}
+	}
+
+	//Засшифровать
+	private async void OnDecrypt(object sender, EventArgs e)
+	{
+		if(fileBytes == null || keyBytes == null)
+		{
+			await DisplayAlert("Ошибка!", "Загрузите файл и ключ!", "OK");
+			return;
+		}
+		try
+		{
+			await decode!.DecryptFile(
+				fileBytes, 
+				keyBytes, 
+				"decrypted.pdf"
+			);
+			await DisplayAlert("Успех", "Сохранение", "OK");
 		}
 		catch(Exception ex)
 		{
