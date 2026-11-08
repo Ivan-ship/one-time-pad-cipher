@@ -139,7 +139,7 @@ public partial class MainPage : ContentPage
 			await encryption!.EncryptFile(
 				fileBytes, 
 				keyBytes, 
-				"encrypted.pdf"
+				"encrypted.docx"
 			);
 			await DisplayAlert("Успеншо", "Сохранение", "OK");
 			await DisplayAlert("Успеное", "Сохранение", "OK");
@@ -163,7 +163,7 @@ public partial class MainPage : ContentPage
 			await decode!.DecryptFile(
 				fileBytes, 
 				keyBytes, 
-				"decrypted.pdf"
+				"decrypted.docx"
 			);
 			await DisplayAlert("Успех", "Сохранение", "OK");
 		}

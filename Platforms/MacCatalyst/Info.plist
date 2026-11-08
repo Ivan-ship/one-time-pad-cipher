@@ -54,7 +54,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>CFBundleDisplayName</key>
+	<string>NetBook</string>
+	<key>CFBundleName</key>
+	<string>NetBook</string>
 	<key>XSAppIconAssets</key>
-	<string>Assets.xcassets/appicon.appiconset</string>
+	<string>Assets.xcassets/icon.appiconset</string>
 </dict>
 </plist>
