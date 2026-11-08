@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using LAB2.Encryption;
+using Microsoft.Maui.Graphics.Text;
 
 namespace LAB2;
 
@@ -9,11 +10,13 @@ public partial class MainPage : ContentPage
 	public MainPage()
 	{
 		InitializeComponent();
+		encryption = new FileEncryption();
 	}
 
 	private EncryptionKey? encryptionKey;
-	private long? fileSize;
-
+	private FileEncryption? encryption;
+	private byte[]? keyBytes;
+	private byte[]? fileBytes;
 	//Загрузка файла!
 	private async void OnPickFileClicked(object sender, EventArgs e)
 	{
@@ -25,17 +28,13 @@ public partial class MainPage : ContentPage
 		var result = await PickAndShow(options);
 		if(result != null)
 		{
-			using(var stream = await result.OpenReadAsync())
-			{
-				long bytesCount = stream.Length;
-				fileSize = bytesCount;
-				FileName.Text = $"Выбранный файл {result.FileName}\n Размер текста {fileSize} байт";
-            	FileName.TextColor = Colors.Green;
-			}
+			fileBytes = await encryption!.GetFileBytes(result);
+			FileName.Text = $"Выбранный файл {result.FileName}\n Размер текста {fileBytes.Length} байт";
+			FileName.TextColor = Colors.Green;
 		}
 	}
 
-	public async Task<FileResult> PickAndShow(PickOptions options)
+	public async Task<FileResult?> PickAndShow(PickOptions options)
 	{		
     	try
     	{
@@ -106,6 +105,7 @@ public partial class MainPage : ContentPage
 		}
 	}
 
+	//Загрузка созданного ключа шифрования
 	private async void OnDowloadKey(object sender, EventArgs e)
 	{
 		var options = new PickOptions
@@ -116,12 +116,33 @@ public partial class MainPage : ContentPage
 		var result = await PickAndShow(options);
 		if(result != null)
 		{
-			using(var stream = await result.OpenReadAsync())
-			{
-				long bytssCount = stream.Length;
-				FileName.Text = $"Ключ шифрования {bytssCount} байт";
-            	FileName.TextColor = Colors.Green;
-			}
+			keyBytes = await encryption!.GetFileBytes(result);
+			FileName.Text = $"Ключ шифрования: {keyBytes.Length}";
+			FileName.TextColor = Colors.Green;
+		}
+	}
+
+	//Зашифровать
+	
+	private async void OnEncrypt(object sender, EventArgs e)
+	{
+		if(fileBytes == null || keyBytes == null)
+		{
+			await DisplayAlert("Ошибка!", "Загрузите файл и ключ!", "OK");
+			return;
+		}
+		try
+		{
+			await encryption!.EncryptFile(
+				fileBytes, 
+				keyBytes, 
+				"encrypted.pdf"
+			);
+			await DisplayAlert("Успеншо", "Сохранение", "OK");
+		}
+		catch(Exception ex)
+		{
+			await DisplayAlert("Сбой", $"{ex}", "OK");
 		}
 	}
 }

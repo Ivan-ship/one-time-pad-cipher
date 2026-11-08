@@ -44,17 +44,6 @@
                     </VisualStateManager.VisualStateGroups>
                 </Button>
 
-                <Entry
-                    x:Name="KeyEntry"
-                    Margin="0, 200, 0, 0"
-                    Placeholder="Введите размер ключа(симв)"
-                    Keyboard="Numeric"
-                    FontSize="18"
-                    TextColor="White"
-                    PlaceholderColor="Gray"
-                    BackgroundColor="Transparent"
-                    WidthRequest="250"
-                    HorizontalOptions="Center"/>
                 <Button
                     Grid.Column="1"
                     Text="Шифрование"
@@ -128,44 +117,77 @@
                 
             </Grid>
             
-            <Button
-                    Grid.Column="1"
+            <Grid 
+                ColumnDefinitions="*, *, *" 
+                ColumnSpacing="10"
+                RowSpacing="10"
+                RowDefinitions="Auto, Auto"
+                >
+                <Entry
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    x:Name="KeyEntry"
+                    Placeholder="Введите размер ключа(симв)"
+                    Keyboard="Numeric"
+                    FontSize="18"
+                    TextColor="White"
+                    PlaceholderColor="Gray"
+                    BackgroundColor="Transparent"
+                    WidthRequest="250"
+                    HorizontalOptions="Center"/>
+
+                <Button
+                    Grid.Column="0"
+                    Grid.Row="1"
                     Text="Сохранить"
                     WidthRequest="155"
-                    Margin="0, 26, 850, 0"
                     HeightRequest="50"
                     BackgroundColor="Green"
                     TextColor="White"
                     FontSize="18"
-                    Clicked="OnSaveKeyCliccked"/>
-            
-            <Button
-                    Grid.Column="2"
+                    Clicked="OnSaveKeyCliccked">
+                </Button>
+
+                <Button
+                    Grid.Column="1"
+                    Grid.Row="0"
                     Text="Ключ"
                     WidthRequest="155"
-                    Margin="0, -80, 0, 0"
                     HeightRequest="50"
                     BackgroundColor="Green"
                     TextColor="White"
                     FontSize="18"
-                    Clicked="OnDowloadKey"/>
-            
-            <Button
-                    Grid.Column="2"
+                    Clicked="OnDowloadKey">
+                </Button>
+                <Button
+                    Grid.Column="1"
+                    Grid.Row="1"
                     Text="Зашифровать"
                     WidthRequest="155"
-                    Margin="0, 0, 0, 0"
                     HeightRequest="50"
-                    BackgroundColor="#FFDA0000"
+                    BackgroundColor="Red"
                     TextColor="White"
                     FontSize="18"
-                    Clicked="OnDowloadKey"/>
+                    Clicked="OnEncrypt"/>
+
+                <Button
+                    Grid.Column="2"
+                    Text="Расшифровать"
+                    WidthRequest="160"
+                    HeightRequest="50"
+                    BackgroundColor="#FF03E1F1"
+                    TextColor="White"
+                    FontSize="18"
+                    Clicked="OnEncrypt">
+                </Button>
+            </Grid>
             
             <Label
                     x:Name="FileName"
                     Text="Файл не выбран"
                     FontSize="18"
                     HorizontalOptions="Center"/>
+            
         </VerticalStackLayout>
     </ScrollView>
 
