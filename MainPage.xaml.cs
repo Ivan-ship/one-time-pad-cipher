@@ -16,7 +16,7 @@ public partial class MainPage : ContentPage
 	private EncryptionKey? encryptionKey;
 	private FileEncryption? encryption;
 	private byte[]? keyBytes;
-
+	private byte[]? fileBytes;
 	//Загрузка файла!
 	private async void OnPickFileClicked(object sender, EventArgs e)
 	{
@@ -28,7 +28,7 @@ public partial class MainPage : ContentPage
 		var result = await PickAndShow(options);
 		if(result != null)
 		{
-			byte[] fileBytes = await encryption!.GetFileBytes(result);
+			fileBytes = await encryption!.GetFileBytes(result);
 			FileName.Text = $"Выбранный файл {result.FileName}\n Размер текста {fileBytes.Length} байт";
 			FileName.TextColor = Colors.Green;
 		}
@@ -123,8 +123,26 @@ public partial class MainPage : ContentPage
 	}
 
 	//Зашифровать
+	
 	private async void OnEncrypt(object sender, EventArgs e)
 	{
-		await DisplayAlert("Attention!", "Оталдка!", "Ok");
+		if(fileBytes == null || keyBytes == null)
+		{
+			await DisplayAlert("Ошибка!", "Загрузите файл и ключ!", "OK");
+			return;
+		}
+		try
+		{
+			await encryption!.EncryptFile(
+				fileBytes, 
+				keyBytes, 
+				"encrypted.pdf"
+			);
+			await DisplayAlert("Успеное", "Сохранение", "OK");
+		}
+		catch(Exception ex)
+		{
+			await DisplayAlert("Сбой", $"{ex}", "OK");
+		}
 	}
 }
